@@ -9,29 +9,34 @@ Dim Email As String
 Dim TempK As String
 
 
-For Each cell In Range("A11:A101")
+For Each Cell In Range("A881:A7680")
     'MsgBox cell.Value
     
-    FullName = cell.Value
+    FullName = Cell.Value
     
     valss = getSplitName(FullName)
     
-    Email = getEmailAddress(cell.row, 3)  'MsgBox Email
-    
-    For Each k In valss
+    Email = getEmailAddress(Cell.row, 3)  'MsgBox Email
+    If Email = "" Then
+        Cells(Cell.row, Cell.Column) = "a"
+    Else
+        For Each k In valss
         TempK = k
-        
-     'check name and email 5th character
-     i = CheckName(TempK, Email)
-     
-     If i = True Then
-         'MsgBox cell.row & TrimedName & getTrimedEmail(Email)
-         Cells(cell.row, 12) = TrimedName & getTrimedEmail(Email)
+            
+         'check name and email 5th character
+         i = CheckName(TempK, Email)
+         
+         If i = True Then
+             'MsgBox cell.row & TrimedName & getTrimedEmail(Email)
+             Cells(Cell.row, 12) = TrimedName & getTrimedEmail(Email)
+             Exit For
+        End If
+        Next
     End If
-    Next
 Next
 
-'MsgBox "Check the list"
+
+MsgBox "Check the list"
 
 
 'FullName = Cells(4, 1)
